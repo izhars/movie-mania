@@ -31,8 +31,8 @@ import ViewAllMovieScreen from './screens/ViewAllMovieScreen';
 import MoreMoviesScreen from './screens/MoreMoviesScreen';
 import ReviewScreen from './screens/ReviewScreen';
 import CompanyScreen from './screens/CompanyScreen';
-import RandomUserList from './screens/randomUserList';
-import UserDetails from './screens/UserDetailPage';
+import RandomUserList from './new_screens/randomUserList';
+import UserDetails from './new_screens/UserDetailPage';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
