@@ -156,10 +156,14 @@ const HomeScreen = () => {
 
   const handleSearch = (query) => {
     setSearchQuery(query);
-    const filtered = watchProviders.filter(provider =>
-      provider.provider_name.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredProviders(filtered);
+    if (query.length > 0) {
+      const filtered = watchProviders.filter(provider =>
+        provider.provider_name.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredProviders(filtered);
+    } else {
+      setFilteredProviders([]);
+    }
   };
 
   const clearSearch = () => {
@@ -270,62 +274,61 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingHorizontal: 10,
+    padding: 16,
+    backgroundColor: 'white',
   },
   section: {
-    padding: 10,
-    backgroundColor: "#F0F3F8",
-    borderRadius: 10,
-    borderWidth: 1,
-    marginTop: 10,
-    borderColor: 'lightgray',
+    marginVertical: 16,
+  },
+  header: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  itemContainer: {
+    marginRight: 8,
+    width: 140,
+  },
+  image: {
+    width: '100%',
+    height: 200,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  itemText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  release_date: {
+    fontSize: 12,
+    color: 'gray',
   },
   providerButton: {
-    padding: 10,
-    backgroundColor: '#eee',
+    backgroundColor: '#ddd',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
     alignItems: 'center',
-    marginTop: 10,
-    borderRadius: 5,
   },
   modalBackground: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     padding: 20,
-    borderRadius: 10,
+    borderRadius: 8,
     width: '80%',
-    maxHeight: 80
   },
   modalHeader: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  searchInput: {
-    flex: 1,
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginRight: 10,
-  },
-  clearSearch: {
-    color: 'blue',
-    marginLeft: 10,
+    marginBottom: 16,
   },
   providerItem: {
-    paddingVertical: 10,
+    padding: 8,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
@@ -334,30 +337,38 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   providerLogo: {
-    width: 30,
-    height: 30,
-    marginRight: 10,
-    borderRadius: 15,
+    width: 40,
+    height: 40,
+    marginRight: 8,
   },
-  header: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  itemContainer: {
-    marginRight: 10,
+  selectedProviderContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-    width: 100,
+    marginBottom: 16,
   },
-  image: {
-    width: 100,
-    height: 150,
-    borderRadius: 10,
+  selectedProviderLogo: {
+    width: 40,
+    height: 40,
+    marginRight: 8,
   },
-  itemText: {
-    fontSize: 14,
-    marginTop: 5,
-    fontFamily: 'Roboto-Bold'
+  selectedProviderText: {
+    fontSize: 16,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  searchInput: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 8,
+    padding: 8,
+    marginRight: 8,
+  },
+  clearSearch: {
+    color: 'blue',
   },
   errorContainer: {
     flex: 1,
@@ -365,35 +376,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   errorText: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 18,
     color: 'red',
   },
-  selectedProviderContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0',
-    padding: 5,
-    borderRadius: 25,
-    marginBottom: 10,
-    marginTop: 5,
-    borderWidth: 1,
-    borderColor: 'lightgray',
-  },
-  selectedProviderLogo: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    marginRight: 10,
-  },
-  selectedProviderText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  release_date: {
-    fontSize: 14,
-    fontFamily: 'Roboto-Regular'
-  }
 });
 
 export default HomeScreen;

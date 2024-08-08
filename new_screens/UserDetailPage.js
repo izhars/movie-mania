@@ -10,11 +10,13 @@ const UserDetailPage = ({ route, navigation }) => {
         <Text style={styles.backButtonText}>Back</Text>
       </TouchableOpacity>
       <Image source={{ uri: user.picture.large }} style={styles.image} />
-      <Text style={styles.text}>{`${user.name.first} ${user.name.last}`}</Text>
-      <Text style={styles.text}>{`${user.email}`}</Text>
-      <Text style={styles.text}>{`${user.phone}`}</Text>
+      <Text style={styles.name}>{`${user.name.first} ${user.name.last}`}</Text>
+      <Text style={styles.text}>{user.email}</Text>
+      <Text style={styles.text}>{user.phone}</Text>
       <Text style={styles.text}>{`${user.location.city}, ${user.location.country}`}</Text>
-      <Text style={styles.text}>{`${user.location.coordinates.latitude}`}</Text>
+      <Text style={styles.coordinates}>
+        Lat: {user.location.coordinates.latitude}, Lon: {user.location.coordinates.longitude}
+      </Text>
     </View>
   );
 };
@@ -24,26 +26,43 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 20,
+    backgroundColor: '#f8f9fa',
   },
   backButton: {
     position: 'absolute',
-    top: 10,
-    left: 10,
+    top: 40,
+    left: 20,
     padding: 10,
+    backgroundColor: '#007bff',
+    borderRadius: 5,
   },
   backButtonText: {
-    fontSize: 18,
-    color: 'blue',
+    fontSize: 16,
+    color: 'white',
   },
   image: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
     marginBottom: 20,
+    borderWidth: 2,
+    borderColor: '#007bff',
+  },
+  name: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#343a40',
   },
   text: {
     fontSize: 18,
-    marginBottom: 10,
+    marginBottom: 5,
+    color: '#495057',
+  },
+  coordinates: {
+    fontSize: 16,
+    marginTop: 10,
+    color: '#6c757d',
   },
 });
 

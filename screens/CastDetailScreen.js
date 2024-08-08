@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     imageItem: {
-        width: 150,
+        width: 100,
         height: 150,
         borderRadius: 10,
         marginRight: 10,

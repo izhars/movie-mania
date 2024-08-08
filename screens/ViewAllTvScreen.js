@@ -94,7 +94,6 @@ const ViewAllTvScreen = () => {
 
     const renderItem = ({ item }) => (
 
-
         <TouchableOpacity
             style={styles.card}
             onPress={() => navigation.navigate('TvDetailScreen', { id: item.id })}
@@ -116,7 +115,6 @@ const ViewAllTvScreen = () => {
                 </Text>
             </View>
         </TouchableOpacity>
-
     );
 
     return (
@@ -184,13 +182,13 @@ const styles = StyleSheet.create({
         marginRight: 'auto',
     },
     card: {
+        backgroundColor: '#fff',
         marginBottom: 10,
         borderRadius: 10,
-        backgroundColor: '#fff', // Set background color if needed
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
         elevation: 5, // Android shadow
         flex: 1,
         margin: 5,
