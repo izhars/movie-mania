@@ -5,6 +5,7 @@ import { BEARER_TOKEN, getPersonCombinedCreditsUrl, getPersonImagesUrl, getPerso
 import Loader from './Loader';
 import SocialIconsForPeople from "./SocialIconsForPeople";
 import HeaderWithBackButton from './HeaderWithBackButton';
+import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 const CastDetailScreen = () => {
     const [personDetails, setPersonDetails] = useState(null);
@@ -202,11 +203,13 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 14,
         fontFamily: 'Roboto-Regular',
-        marginTop: 10
+        marginTop: 10,
+        color:"black"
     },
     contentText: {
         fontSize: 16,
         fontFamily: 'Roboto-Medium',
+          color:"gray"
     },
     profileImage: {
         width: 120,
@@ -226,6 +229,7 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 20,
         fontFamily: 'Roboto-Bold',
+          color:"black"
     },
     placeOfBirth: {
         fontSize: 16,
@@ -247,10 +251,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'Roboto-Bold',
         marginBottom: 8,
+        color:"black"
     },
     biographyContent: {
         fontSize: 16,
         fontFamily: 'Roboto-Regular',
+        color:'gray'
     },
     readMore: {
         fontSize: 16,
@@ -265,6 +271,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'Roboto-Bold',
         marginBottom: 8,
+          color:"black"
     },
     imageItem: {
         width: 100,
@@ -284,6 +291,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'Roboto-Bold',
         marginBottom: 8,
+          color:"black"
     },
     creditItem: {
         width: 100,
@@ -300,6 +308,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Roboto-Regular',
         textAlign: 'center',
+        color:"black"
     },
     backButton: {
         position: 'absolute',

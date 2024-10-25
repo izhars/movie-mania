@@ -159,7 +159,8 @@ const styles = StyleSheet.create({
     mediaTitle: {
         fontFamily: 'Roboto-Bold',
         padding: 10,
-        backgroundColor: '#F0F3F8'
+        backgroundColor: '#F0F3F8',
+        color:"black"
     },
 });
 

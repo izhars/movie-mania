@@ -31,8 +31,6 @@ import ViewAllMovieScreen from './screens/ViewAllMovieScreen';
 import MoreMoviesScreen from './screens/MoreMoviesScreen';
 import ReviewScreen from './screens/ReviewScreen';
 import CompanyScreen from './screens/CompanyScreen';
-import RandomUserList from './new_screens/randomUserList';
-import UserDetails from './new_screens/UserDetailPage';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -84,15 +82,6 @@ const MainTabScreen = () => (
     <Tab.Screen
       name="Search"
       component={SearchScreen}
-      options={{
-        tabBarIcon: ({ color }) => (
-          <AntDesign name="search1" size={24} color={color} />
-        ),
-      }}
-    />
-     <Tab.Screen
-      name="List"
-      component={RandomUserList}
       options={{
         tabBarIcon: ({ color }) => (
           <AntDesign name="search1" size={24} color={color} />
@@ -191,11 +180,6 @@ const App = () => {
             <Stack.Screen
               name="CompanyScreen"
               component={CompanyScreen}
-              options={{ headerShown: false }}
-            />
-             <Stack.Screen
-              name="UserDetailPage"
-              component={UserDetails}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>

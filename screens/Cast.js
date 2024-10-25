@@ -45,10 +45,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Roboto-Medium',
     marginBottom: 2,
+    color:'black'
   },
   character: {
     fontSize: 14,
     color: '#555',
+    fontFamily:'Roboto-Regular'
   },
 });
 

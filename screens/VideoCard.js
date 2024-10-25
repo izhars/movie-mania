@@ -71,10 +71,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Roboto-Regular',
     width: 240,
+    color:'black'
   },
   date: {
     fontSize: 14,
-    fontFamily: 'Roboto-Light',
+    fontFamily:'Roboto-Regular',
     color: '#666',
     marginTop: 2,
     width: 240,

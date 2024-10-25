@@ -132,7 +132,8 @@ const styles = StyleSheet.create({
     videoTitle: {
         fontFamily: 'Roboto-Bold',
         padding: 10,
-        backgroundColor: '#F0F3F8'
+        backgroundColor: '#F0F3F8',
+        color:'black'
     },
 });
 

@@ -121,6 +121,16 @@ const HomeScreen = () => {
     }
   }, [providerId]);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return 'Invalid Date';
+    }
+    const options = { day: 'numeric', month: 'short', year: 'numeric' };
+    return new Intl.DateTimeFormat('en-GB', options).format(date);
+  };
+
+
   const renderTvShowItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <TouchableOpacity onPress={() => navigation.navigate('TvDetailScreen', { id: item.id })}>
@@ -129,7 +139,7 @@ const HomeScreen = () => {
           style={styles.image}
         />
         <Text style={styles.itemText} ellipsizeMode='tail' numberOfLines={2}>{item.name}</Text>
-        <Text style={styles.release_date}>{item.first_air_date}</Text>
+        <Text style={styles.release_date}>{formatDate(item.first_air_date)}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -142,7 +152,7 @@ const HomeScreen = () => {
           style={styles.image}
         />
         <Text style={styles.itemText}>{item.title}</Text>
-        <Text style={styles.release_date}>{item.release_date}</Text>
+        <Text style={styles.release_date}>{formatDate(item.release_date)}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -282,8 +292,9 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 8,
+    fontFamily: 'Roboto-Bold',
+    marginBottom:8,
+    color: 'black',
   },
   itemContainer: {
     marginRight: 8,
@@ -296,8 +307,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   itemText: {
-    fontSize: 14,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontFamily: 'Roboto-Medium',
+    paddingVertical: 5,
+    color: 'black',
   },
   release_date: {
     fontSize: 12,
@@ -326,6 +339,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 16,
+    color:"red"
   },
   providerItem: {
     padding: 8,
@@ -366,6 +380,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 8,
     marginRight: 8,
+      color:"black"
   },
   clearSearch: {
     color: 'blue',

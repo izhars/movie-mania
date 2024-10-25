@@ -43,15 +43,15 @@ const TvDetailScreen = ({ route }) => {
         fetchMovieData();
     }, [id]);
 
-
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        if (isNaN(date.getTime())) {
-            return 'Invalid Date';
+    const formatPublishedDate = (dateString) => {
+        if (dateString) {
+          const date = new Date(dateString);
+          const options = { day: 'numeric', month: 'short', year: 'numeric' };
+          return date.toLocaleDateString('en-IN', options).replace(' ', ', ');
         }
-        const options = { day: 'numeric', month: 'short', year: 'numeric' };
-        return new Intl.DateTimeFormat('en-GB', options).format(date);
-    };
+        return '';
+      };
+    
 
 
     const fetchMovieData = async () => {
@@ -192,7 +192,7 @@ const TvDetailScreen = ({ route }) => {
                             <Text style={styles.reviewTitle} color="red">A review by </Text>
                             <Text style={styles.text}>{author}</Text>
                         </View>
-                        <Text style={styles.subtitle}>Written by {author} on {new Date(created_at).toLocaleDateString()}</Text>
+                        <Text style={styles.subtitle}>Written by {author} on {formatPublishedDate(created_at)}</Text>
                         {author_details.rating && <Text style={styles.ratingText}>Rating: {author_details.rating}/10</Text>}
                         <Text style={styles.reviewText} ellipsizeMode='tail' numberOfLines={5}>{content}</Text>
                     </View>
@@ -237,7 +237,7 @@ const TvDetailScreen = ({ route }) => {
                         <View style={styles.chipContainer}>
                             <View style={styles.detailContainer}>
                                 <MaterialCommunityIcons name="calendar" size={20} color="#245d94" />
-                                <Text style={styles.releaseText}>{formatDate(tvShow.first_air_date)}</Text>
+                                <Text style={styles.releaseText}>{formatPublishedDate(tvShow.first_air_date)}</Text>
                             </View>
                         </View>
                         <View style={styles.genresContainer}>
@@ -289,7 +289,7 @@ const TvDetailScreen = ({ route }) => {
                 </View>
                 <View style={styles.section}>
                     <Text variant="titleMedium" style={styles.sectionTitle}>Overview</Text>
-                    <Text>{tvShow.overview}</Text>
+                    <Text style={styles.overview}>{tvShow.overview}</Text>
                 </View>
 
                 {/* About Movie */}
@@ -303,13 +303,11 @@ const TvDetailScreen = ({ route }) => {
                             horizontal
                             showsHorizontalScrollIndicator={false}
                         >
-                            {tvShow.created_by.map((creators, index) => (
-                                <View key={index}>
-
-                                    <Text style={styles.text}>{creators.name}</Text>
-                                </View>
-                            ))}
+                            <Text style={styles.text}>
+                                {tvShow.created_by.map((creator) => creator.name).join(', ')}
+                            </Text>
                         </ScrollView>
+
                         <Text style={styles.detailHeader}>Networks</Text>
                         {tvShow.networks && tvShow.networks.length > 0 ? (
                             <FlatList
@@ -370,13 +368,13 @@ const TvDetailScreen = ({ route }) => {
                                 />
                             ) : (
                                 <View style={[styles.poster, styles.placeholderImage]}>
-                                    <Text>No Image Available</Text>
+                                    <Text style={styles.placeholderText}>No Image Available</Text>
                                 </View>
                             )}
                             <View style={styles.info}>
                                 <Text style={styles.seasonTitle}>{lastSeason.name}</Text>
                                 <Text style={styles.seasonSubtitle}>{new Date(lastSeason.air_date).getFullYear()} • {lastSeason.episode_count} Episodes</Text>
-                                <Text style={styles.overview}>Season {lastSeason.season_number} of {tvShow.name} premiered on {new Date(lastSeason.air_date).toLocaleDateString()}.</Text>
+                                <Text style={styles.overview}>Season {lastSeason.season_number} of {tvShow.name} premiered on {formatPublishedDate(lastSeason.air_date)}.</Text>
                             </View>
                         </View>
                     </TouchableOpacity>
@@ -386,7 +384,7 @@ const TvDetailScreen = ({ route }) => {
                         <>
                             <Text style={styles.sectionTitle}>Next Episode</Text>
                             <View style={styles.contentSeason}>
-                                <TouchableOpacity onPress={() => navigation.navigate('EpisodeDetailScreen', { tvId:nextEpisode.id, seasonNumber:nextEpisode.season_number, episodeNumber:nextEpisode.episode_number })}>
+                                <TouchableOpacity onPress={() => navigation.navigate('EpisodeDetailScreen', { tvId: nextEpisode.id, seasonNumber: nextEpisode.season_number, episodeNumber: nextEpisode.episode_number })}>
                                     {nextEpisode.still_path ? (
                                         <Image
                                             source={{ uri: `https://image.tmdb.org/t/p/w500${nextEpisode.still_path}` }}
@@ -394,7 +392,7 @@ const TvDetailScreen = ({ route }) => {
                                         />
                                     ) : (
                                         <View style={[styles.posterSeason, styles.placeholderImage]}>
-                                            <Text>No Image Available</Text>
+                                            <Text style={styles.placeholderText}>No Image Available</Text>
                                         </View>
                                     )}
                                 </TouchableOpacity>
@@ -565,6 +563,11 @@ const styles = StyleSheet.create({
         color: 'white',
         marginBottom: 10,
     },
+    overview: {
+        fontSize: 16,
+        fontFamily: "Roboto-Regular",
+        color: 'gray'
+    },
     logo: {
         width: 50,
         height: 50,
@@ -578,6 +581,11 @@ const styles = StyleSheet.create({
     scrollContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    ratingText:{
+        fontSize:14,
+        color:'black',
+        fontFamily:'Roboto-Semibold'
     },
     chipContainer: {
         flexDirection: 'row',
@@ -608,6 +616,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         borderColor: 'lightgray',
+    },
+    placeholderText: {
+        fontSize: 16,
+        color: 'gray'
     },
     sectionTitle: {
         fontSize: 18,
@@ -640,6 +652,12 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         fontSize: 15,
     },
+    tagline: {
+        fontSize: 16,
+        fontFamily: "Roboto-Italic",
+        textAlign: 'center',
+        color: 'black'
+    },
     genresContainer: {
         flexDirection: 'row',
         flexWrap: 'wrap',
@@ -664,7 +682,8 @@ const styles = StyleSheet.create({
     },
     releaseText: {
         fontFamily: "Roboto-Regular",
-        marginStart: 5
+        marginStart: 5,
+        color: '#135796',
     },
     ratingContainer: {
         flexDirection: 'row',
@@ -951,7 +970,8 @@ const styles = StyleSheet.create({
     },
     reviewTitle: {
         fontSize: 14,
-        fontFamily: 'Roboto-Regular'
+        fontFamily: 'Roboto-Regular',
+        color:'#808080'
     },
     subtitle: {
         fontSize: 14,
@@ -961,6 +981,8 @@ const styles = StyleSheet.create({
     },
     reviewText: {
         fontSize: 14,
+        color: 'gray',
+        fontFamily:'Roboto-Regular'
     },
     seeMore: {
         fontSize: 14,

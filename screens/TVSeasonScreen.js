@@ -124,7 +124,7 @@ const TVSeasonScreen = ({ route }) => {
                                             />
                                         ) : (
                                             <View style={[styles.image, styles.placeholderImage]}>
-                                                <Text>No Image Available</Text>
+                                                <Text style={styles.placeholderText}>No Image Available</Text>
                                             </View>
                                         )}
                                         <View style={styles.textContainer}>
@@ -231,7 +231,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginBottom: 16,
         fontFamily: "Roboto-Medium",
+        color:'black'
     },
+    placeholderText: {
+        color: 'gray',
+        fontSize: 16,
+      },
     subtitle: {
         fontSize: 18,
         marginBottom: 16,
@@ -256,11 +261,13 @@ const styles = StyleSheet.create({
     episodeTitle: {
         fontSize: 18,
         fontFamily: 'Roboto-Medium',
+        color:'black'
     },
     episodeOverview: {
         fontSize: 14,
         marginBottom: 8,
         fontFamily: 'Roboto-Regular',
+        color:'gray'
     },
     episodeDetails: {
         fontSize: 12,
@@ -280,6 +287,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'Roboto-Medium',
         marginTop: 8,
+        color:'black'
     },
     castCharacter: {
         fontSize: 12,

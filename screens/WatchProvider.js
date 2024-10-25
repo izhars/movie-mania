@@ -7,7 +7,7 @@ const ITEM_WIDTH = width * 0.22; // Adjust as needed based on your design
 
 const WatchProvider = ({ providers }) => {
   if (!providers || (!providers.flatrate && !providers.rent && !providers.buy)) {
-    return <Text>No providers available for India.</Text>;
+    return <Text style={styles.text}>No providers available for India.</Text>;
   }
 
   const handleProviderPress = (provider) => {
@@ -129,6 +129,11 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 5,
     flexDirection:'row'
+  },
+  text:{
+    fontSize:15,
+    fontFamily:'Roboto-Regular',
+    color:'gray'
   },
   sectionTitle: {
     fontSize: 16,

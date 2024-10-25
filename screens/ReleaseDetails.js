@@ -66,10 +66,12 @@ const styles = StyleSheet.create({
     },
     releaseLabel: {
         fontSize: 15,
-        fontFamily: 'Roboto-Bold'
+        fontFamily: 'Roboto-Bold',
+        color:'black'
     },
     value: {
-        fontFamily: 'Roboto-Regular'
+        fontFamily: 'Roboto-Regular',
+        color:'gray'
     }
 });
 

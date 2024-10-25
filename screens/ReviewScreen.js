@@ -64,7 +64,7 @@ const ReviewScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-     <HeaderWithBackButton title={title} />
+      <HeaderWithBackButton title={title} />
       {loading ? (
         <View style={styles.loadingContainer}>
           <Loader />
@@ -83,7 +83,7 @@ const ReviewScreen = ({ route }) => {
 export default ReviewScreen;
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     flex: 1
   },
   section: {
@@ -141,4 +141,19 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Bold',
     marginBottom: 10,
   },
+  reviewTitle: {
+    fontSize: 14,
+    fontFamily: 'Roboto-Regular',
+    color: '#808080'
+  },
+  ratingText: {
+    fontSize: 14,
+    color: 'black',
+    fontFamily: 'Roboto-Semibold'
+  },
+  reviewText: {
+    fontSize: 14,
+    color: 'gray',
+    fontFamily:'Roboto-Regular'
+},
 });

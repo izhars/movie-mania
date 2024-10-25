@@ -11,11 +11,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { ScrollView } from 'react-native-virtualized-view'
 import WatchProvider from './WatchProvider'
 import Loader from './Loader';
-import RatingCircle from './RatingCircle'; 
+import RatingCircle from './RatingCircle';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Cast from './Cast';
 import ReleaseDetails from './ReleaseDetails';
-import SocialIcons from './SocialIcons'; 
+import SocialIcons from './SocialIcons';
 import TabContainerWithBd from './TabContainerWithBd'
 import MovieRecmondTab from './MovieRecmondTab'
 import LinearGradient from 'react-native-linear-gradient';
@@ -97,25 +97,25 @@ const MovieDetailScreen = ({ route }) => {
                         'Content-Type': 'application/json',
                     },
                 }),
-                fetch(getWatchProvidersUrl(movieId), { 
+                fetch(getWatchProvidersUrl(movieId), {
                     headers: {
                         Authorization: `Bearer ${BEARER_TOKEN}`,
                         'Content-Type': 'application/json',
                     },
                 }),
-                fetch(getMovieReleaseDate(movieId), { 
+                fetch(getMovieReleaseDate(movieId), {
                     headers: {
                         Authorization: `Bearer ${BEARER_TOKEN}`,
                         'Content-Type': 'application/json',
                     },
                 }),
-                fetch(getMovieBackdrops(movieId), { 
+                fetch(getMovieBackdrops(movieId), {
                     headers: {
                         Authorization: `Bearer ${BEARER_TOKEN}`,
                         'Content-Type': 'application/json',
                     },
                 }),
-                fetch(getRecommendation(movieId), { 
+                fetch(getRecommendation(movieId), {
                     headers: {
                         Authorization: `Bearer ${BEARER_TOKEN}`,
                         'Content-Type': 'application/json',
@@ -151,7 +151,7 @@ const MovieDetailScreen = ({ route }) => {
             setKeyword(keywordData.keywords);
             setReleaseDates(movieReleaseData.results);
             setExternalId(movieDetailsData.external_ids);
-            console.log("Movie Detail data: ",movieDetailsData);
+            console.log("Movie Detail data: ", movieDetailsData);
 
             if (watchProvidersData.results && watchProvidersData.results.IN) {
                 setWatchProviders(watchProvidersData.results.IN);
@@ -305,33 +305,41 @@ const MovieDetailScreen = ({ route }) => {
                 </View>
                 <View style={styles.section}>
                     <Text variant="titleMedium" style={styles.sectionTitle}>Overview</Text>
-                    <Text>{movie.overview}</Text>
+                    <Text style={styles.overview}>{movie.overview}</Text>
                 </View>
                 <View style={styles.section}>
                     <Text variant="titleMedium" style={styles.sectionTitle}>About movie</Text>
                     <SocialIcons externalIds={externalId} />
                     <View style={styles.details}>
-                        <Text>Status</Text>
+                        <Text style={styles.label}>Status</Text>
                         <Text style={styles.text}>{movie.status}</Text>
-                        <Text>Original Language</Text>
-                        <Text style={styles.text}>{movie.original_language}</Text>
-                        <Text>Budget</Text>
+
+                        <Text style={styles.label}>Original Language</Text>
+                        <Text style={styles.text}>
+                            {movie.spoken_languages.length > 0
+                                ? movie.spoken_languages[0].english_name
+                                : 'No language available'}
+                        </Text>
+
+                        <Text style={styles.label}>Budget</Text>
                         <Text style={styles.text}>${formatNumberWithCommas(movie.budget)}</Text>
-                        <Text>Revenue</Text>
+
+                        <Text style={styles.label}>Revenue</Text>
                         <Text style={styles.text}>${formatNumberWithCommas(movie.revenue)}</Text>
-                        <Text>Production Countries</Text>
+
+                        <Text style={styles.label}>Production Countries</Text>
                         {movie.production_countries.map((country, index) => (
                             <Paragraph key={index} style={styles.text}>
                                 {country.name}
                             </Paragraph>
                         ))}
-                        <Text>Production Companies:</Text>
+                        <Text style={styles.label}>Production Companies:</Text>
                         <View style={styles.companiesContainer}>
                             {movie.production_companies.map((company, index) => (
                                 <Text key={index} style={styles.companyText}>{company.name}</Text>
                             ))}
                         </View>
-                        <Text>Keywords</Text>
+                        <Text marginTop={10} style={styles.label}>Keywords</Text>
                         <View style={styles.gridContainer}>
                             {keyword.map((item, index) => (
                                 <View key={index}>
@@ -436,7 +444,8 @@ const styles = StyleSheet.create({
     tagline: {
         fontSize: 16,
         fontFamily: "Roboto-Italic",
-        textAlign: 'center'
+        textAlign: 'center',
+        color: 'black'
     },
     container: {
         flex: 1,
@@ -447,6 +456,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
+    },
+    overview: {
+        fontSize: 16,
+        fontFamily: "Roboto-Regular",
+        color: 'gray'
     },
     header: {
         flexDirection: 'row',
@@ -566,8 +580,15 @@ const styles = StyleSheet.create({
     },
     releaseText: {
         fontFamily: "Roboto-Medium",
-        marginStart: 5
+        marginStart: 5,
+        color: '#135796'
     },
+    label: {
+        fontSize: 14,
+        fontWeight: 'Roboto-Medium',
+        marginBottom: 5,
+        color: 'gray',
+      },
     ratingContainer: {
         flexDirection: 'row',
         marginTop: 10
@@ -575,8 +596,8 @@ const styles = StyleSheet.create({
     voteContainer: {
         marginStart: 10,
         flexDirection: 'column',
-        alignItems: 'center', 
-        justifyContent: 'center', 
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     scoreText: {
         fontSize: 14,
@@ -600,13 +621,13 @@ const styles = StyleSheet.create({
         marginEnd: 10
     },
     line: {
-        height: '100%', 
+        height: '100%',
         width: 1,
         backgroundColor: '#135796',
         marginEnd: 10
     },
     details: {
-        backgroundColor: '#f0f0f0', 
+        backgroundColor: '#f0f0f0',
         paddingTop: 10,
         paddingBottom: 10,
         borderRadius: 5,
@@ -618,7 +639,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto-Medium'
     },
     companiesContainer: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         flexWrap: 'wrap',
     },
     companyText: {
@@ -681,7 +702,7 @@ const styles = StyleSheet.create({
     castDetails: {
         marginTop: 5,
         alignItems: 'center',
-        width: 100, 
+        width: 100,
     },
     castName: {
         fontSize: 14,
@@ -717,6 +738,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'Roboto-Bold',
         marginBottom: 10,
+        color:'black'
     },
     buttonSeason: {
         marginTop: 15,

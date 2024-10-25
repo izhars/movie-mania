@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, FlatList, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Card, Text } from 'react-native-paper';
-import Ionicons from 'react-native-vector-icons/Ionicons'; // Import the icon component
 import Loader from './Loader';
 import RatingCircle from './RatingCircle';
 import HeaderWithBackButton from './HeaderWithBackButton';
